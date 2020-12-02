@@ -3,6 +3,23 @@ CREATE DATABASE employees_db;
 
 USE employees_db;
 
+
+-- Table department
+CREATE TABLE department(
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(30) UNIQUE NOT NULL
+);
+
+-- Table role
+CREATE TABLE role(
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(30) UNIQUE NOT NULL,
+    salary DECIMAL UNSIGNED NOT NULL,
+    department_id INT UNSIGNED NOT NULL,
+    INDEX dep_index (department_id),
+    CONSTRAINT fk_department FOREIGN KEY (department_id) REFERENCES department(id) ON DELETE CASCADE
+);
+
 -- TABLE employee
 CREATE TABLE employee(
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -16,18 +33,3 @@ CREATE TABLE employee(
     CONSTRAINT fk_manager FOREIGN KEY (manager_id) REFERENCES employee(id) ON DELETE SET NULL
 );
 
--- Table role
-CREATE TABLE role(
-    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    title VARCHAR(30) UNIQUE NOT NULL,
-    salary DECIMAL UNSIGNED NOT NULL,
-    department_id INT UNSIGNED NOT NULL,
-    INDEX dep_index (department_id),
-    CONSTRAINT fk_department FOREIGN KEY (department_id) REFERENCES department(id) ON DELETE CASCADE
-);
-
--- Table department
-CREATE TABLE department(
-    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(30) UNIQUE NOT NULL
-);
