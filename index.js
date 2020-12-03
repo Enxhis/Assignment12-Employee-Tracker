@@ -108,18 +108,85 @@ function displayMainPrompts(){
             return quit(); 
     }
 }
+// Function displays all employees
+function viewEmployees(){
+    // function call to display menu again
+    displayMainPrompts()
+}
 
-function viewEmployees()
-function viewEmployeesByDepartment()
-function viewEmployeesByManager()
-function addEmployee()
-function removeEmployee()
-function updateEmployeeRole()
-function updateEmployeeManager()
-function viewDepartments()
-function addDepartment()
-function removeDepartment()
-function viewRoles()
-function addRole()
-function removeRole()
-function quit()
+// Function displays employees by department
+function viewEmployeesByDepartment(){
+    // function call to display menu again
+    displayMainPrompts()
+}
+
+// Function displays employees by manager
+function viewEmployeesByManager(){
+    // function call to display menu again
+    displayMainPrompts()
+}
+
+// Function adds new employee in database
+function addEmployee() {
+    // function call to display menu again
+    displayMainPrompts()
+}
+
+// Function deletes employee from database
+function removeEmployee(){
+    // function call to display menu again
+    displayMainPrompts()
+}
+
+// Function updates data for current employee role
+function updateEmployeeRole(){
+    // function call to display menu again
+    displayMainPrompts()
+}
+
+// Function updates data for manager employee
+function updateEmployeeManager(){
+    // function call to display menu again
+    displayMainPrompts()
+}
+
+// Function displays departments
+function viewDepartments(){
+    // function call to display menu again
+    displayMainPrompts()
+}
+
+// Function adds new department to database
+function addDepartment() {
+    // function call to display menu again
+    displayMainPrompts()
+}
+
+// Function deletes a current department
+function removeDepartment(){
+    // function call to display menu again
+    displayMainPrompts()
+}
+
+// Function displays roles
+function viewRoles(){
+    // function call to display menu again
+    displayMainPrompts()
+}
+
+// Function adds a new role in database
+function addRole(){
+    // function call to display menu again
+    displayMainPrompts()
+}
+
+// Function deletes a current role from database
+function removeRole(){
+    // function call to display menu again
+    displayMainPrompts()
+}
+
+// Function quits the program
+function quit(){
+
+}
