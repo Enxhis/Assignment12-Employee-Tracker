@@ -165,6 +165,11 @@ function updateEmployeeManager(){
 
 // Function displays departments
 function viewDepartments(){
+    // call findDepartments function from db
+    const departments = db.findDepartments();
+    console.log("\n");
+    // present data in tabular way
+    console.table(departments);
     // function call to display menu again
     displayMainPrompts()
 }

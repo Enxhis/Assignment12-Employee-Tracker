@@ -26,7 +26,17 @@ class DataBase {
         return this.connection.query(
             "SELECT role.id, role.title, department.name AS department, role.salary " +
             "FROM role LEFT JOIN department ON role.department_id = department_id;"
-        )
+        );
+    }
+
+    // find all departments using joins
+    findDepartments(){
+        return this.connection.query(
+            "SELECT department.id, department.name, SUM(role.salary) AS utilized_budget "+
+            "FROM employee LEFT JOIN role ON employee.role_id = role.id "+
+            "LEFT JOIN department ON role.department_id = department.id "+
+            "GROUP BY department.id, department.name;"
+        );
     }
 
 }
