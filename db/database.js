@@ -82,6 +82,13 @@ class DataBase {
         );
     }
 
+    // Delete from database existing department
+    deleteDepartment(departmentId) {
+        return this.connection.query(
+            "DELETE FROM department WHERE id = ?", departmentId
+        );
+    }
+
 
 }
 

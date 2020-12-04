@@ -265,14 +265,12 @@ function removeEmployee() {
     }));
 
     // choose employee id to delete from database
-    const { employeeId } = prompt([
-        {
-            type: "list",
-            name: "employeeId",
-            message: "Which employee would you like to remove?",
-            choices: chooseEmployee
-        }
-    ]);
+    const { employeeId } = prompt({
+        type: "list",
+        name: "employeeId",
+        message: "Which employee would you like to remove?",
+        choices: chooseEmployee
+    });
 
     // pass employeeId to the deleteEmployee function
     db.deleteEmployee(employeeId);
@@ -324,6 +322,27 @@ function addDepartment() {
 
 // Function deletes a current department
 function removeDepartment() {
+    const departments = db.findDepartments();
+
+    // choose department
+    const chooseDepartment = departments.map(({ id, name }) => ({
+        name: name,
+        value: id
+    }));
+
+    // choose departemnt id to delete
+    const { departmentId } = prompt({
+        type: "list",
+        name: "departmentId",
+        message: "Which department would you like to remove, together with roles &n employees?",
+        choices: chooseDepartment
+    });
+
+    // pass departmentId to the deleteDepartment function
+    db.deleteDepartment(departmentId);
+    //TEST IT
+    // Notify that the department was deleted
+    console.log("Department was deleted successfully!");
     // function call to display menu again
     displayMainPrompts()
 }
