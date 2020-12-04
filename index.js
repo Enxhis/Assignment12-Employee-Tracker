@@ -1,11 +1,18 @@
 const {prompt} = require("inquirer");
 const logo = require("asciiart-logo");
+// require db
+const db = require("./db");
+require("console.table");
 
 // display logo prompt function
 function logoDisplay() {
     const logoTxt = logo({name: "Employee Manager"}).render();
     console.log(logoTxt);
 }
+
+// call logoDisplay
+logoDisplay();
+
 
 // display prompts
 function displayMainPrompts(){
@@ -110,6 +117,10 @@ function displayMainPrompts(){
 }
 // Function displays all employees
 function viewEmployees(){
+    // call the findEmployees function from db
+    const employees = db.findEmployees();
+    console.log("\n");
+    console.table(employees);
     // function call to display menu again
     displayMainPrompts()
 }
