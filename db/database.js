@@ -102,6 +102,13 @@ class DataBase {
         );
     }
 
+    // Update Manager of the employee
+    updateManager(employeeId, managerId) {
+        return this.connection.query(
+            "UPDATE employee SET manager_id = ? WHERE id =? ", [managerId, employeeId]
+        );
+    }
+
 
 }
 

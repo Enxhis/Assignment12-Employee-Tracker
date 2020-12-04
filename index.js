@@ -325,8 +325,45 @@ function updateEmployeeRole() {
 
 // Function updates data for manager employee
 function updateEmployeeManager() {
+    // get all employees
+    const employees = db.findEmployees();
+    //choose employee
+    const chooseEmployee = employees.map(({ id, firstname, lastname }) => ({
+        name: `${firstname} ${lastname}`,
+        value: id
+    }));
+
+    // choose employee to be updated
+    const { employeeId } = prompt({
+        type: "list",
+        name: "employeeId",
+        message: "Which employee's manager would you like to update?",
+        choices: chooseEmployee
+    });
+
+    const managers = db.findEmployeesByManager(employeeId);
+
+    // choose manager
+    const chooseManager = managers.map(({ id, firstname, lastname }) => ({
+        name: `${firstname} ${lastname}`,
+        value: id
+    }));
+
+    // choose managerId to be updated
+    const { managerId } = prompt({
+        type: "list",
+        name: "managerId",
+        message: "Which employee would you like to set as manager?",
+        choices: chooseManager
+    });
+
+    // pass managerId and employeeID to the updateManager
+    db.updateManager(employeeId, managerId);
+    // TEST IT
+    // Notify that the manager was updated
+    console.log("Employee's manager was updated successfully!");
     // function call to display menu again
-    displayMainPrompts()
+    displayMainPrompts();
 }
 
 // Function displays departments
