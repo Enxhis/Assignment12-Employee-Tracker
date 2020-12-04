@@ -283,6 +283,42 @@ function removeEmployee() {
 
 // Function updates data for current employee role
 function updateEmployeeRole() {
+    const employees = db.findEmployees();
+    // choose employee
+    const chooseEmployee = employees.map(({ id, firstname, lastname }) => ({
+        name: `${firstname} ${lastname}`,
+        value: id
+    }));
+
+    // choose employeeId who will get its role updated
+    const { employeeId } = prompt({
+        type: "list",
+        name: "employeeId",
+        message: "Which employee's role would you like to update?",
+        choices: chooseEmployee
+    });
+
+    // get all roles
+    const roles = db.findRoles();
+    // choose role
+    const chooseRole = roles.map(({ id, title }) => ({
+        name: title,
+        value: id
+    }));
+    // choose roleId that the employee will get assigned with
+    const { roleId } = prompt({
+        type: "list",
+        name: "roleId",
+        message: "Which role will be assigned to the employee?",
+        choices: chooseRole
+    });
+
+    // pass roleId and employeeId to updateRole
+    db.updateRole(employeeId, roleId);
+    //TEST IT
+    // Notify that employee's role was updated
+    console.log("Employee's role updated successfully!");
+
     // function call to display menu again
     displayMainPrompts()
 }

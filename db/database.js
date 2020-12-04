@@ -95,6 +95,12 @@ class DataBase {
             "DELETE FROM role WHERE id = ?", roleId
         );
     }
+    //Update Role of the employee
+    updateRole(employeeId, roleId) {
+        return this.connection.query(
+            "UPDATE employee SET role_id = ? WHERE id = ?", [roleId, employeeId]
+        );
+    }
 
 
 }
