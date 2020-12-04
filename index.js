@@ -194,6 +194,63 @@ function viewEmployeesByManager() {
 
 // Function adds new employee in database
 function addEmployee() {
+    const roles = db.findRoles();
+    const employees = db.findEmployees();
+
+    // get input from user for the new employee (firstname, lastname)
+    const newEmployee = prompt([
+        {
+            name: "firstname",
+            message: "What is employee's firstname? "
+        },
+        {
+            name: "lastname",
+            message: "What is employee's lastname? "
+        }
+    ]);
+
+    // add the role that new employee has
+    const chooseRole = roles.map(({ id, title }) => ({
+        name: title,
+        value: id
+    }));
+
+    // get role title from prompt
+    const { roleId } = prompt({
+        type: "list",
+        name: "roleId",
+        message: "What is new Employee's role?",
+        choices: chooseRole
+    });
+
+    // assign roleId taken from the prompt to the employee.role_id
+    newEmployee.role_id = roleId;
+
+    // assign manager to the new employee
+    const chooseManager = employees.map(({ id, firstname, lastname }) => ({
+        name: `${firstname} ${lastname}`,
+        value: id
+    }));
+
+    chooseRole.unshift({ name: "None", value: null });
+
+    // get manager from prompt
+    const { managerId } = prompt({
+        type: "list",
+        name: "managerId",
+        message: "Who is the manager of the new employee? ",
+        choices: chooseManager
+    });
+
+    // assign managerId to the employee
+    newEmployee.manager_id = managerId;
+
+    //call the createNewEmployee
+    db.createNewEmployee(newEmployee);
+    // TEST IT
+    //notify for the new Employee added
+    console.log(`${newEmployee.firstname} ${newEmployee.lastname} is added to the database`);
+
     // function call to display menu again
     displayMainPrompts()
 }

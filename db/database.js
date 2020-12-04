@@ -55,6 +55,13 @@ class DataBase {
             "GROUP BY department.id, department.name;"
         );
     }
+    // create new employee
+    createNewEmployee(employee) {
+        return this.connection.query(
+            "INSERT INTO employee SET ?", employee
+        );
+    }
+
 
 }
 
