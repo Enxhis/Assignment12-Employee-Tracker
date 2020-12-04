@@ -132,13 +132,13 @@ function viewEmployeesByDepartment() {
     const departments = db.findDepartments();
 
     // choose department
-    const chooseDepartment = departments.map(({id, name}) => ({
+    const chooseDepartment = departments.map(({ id, name }) => ({
         name: name,
         value: id
     }));
 
     // user prompt choice
-    const {departmentId} = prompt([
+    const { departmentId } = prompt([
         {
             type: "list",
             name: "departmentId",
@@ -264,5 +264,6 @@ function removeRole() {
 
 // Function quits the program
 function quit() {
-
+    console.log("Thank you for interacting with the terminal prompt! GoodBye!");
+    process.exit();
 }

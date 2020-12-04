@@ -5,41 +5,41 @@ const connection = require("./connection");
 
 class DataBase {
     // constructor of the class, takes connection as an argument
-    constructor(connection){
+    constructor(connection) {
         this.connection = connection;
     }
 
     // find all employees using joins
-    findEmployees(){
+    findEmployees() {
         return this.connection.query(
-            "SELECT employee.id, employee.firstname, employee.lastname, role.title,"+ 
+            "SELECT employee.id, employee.firstname, employee.lastname, role.title," +
             "department.name AS department, role.salary, " +
             "CONCAT(manager.firstname, ' ', manager.lastname) AS manager " +
-            "FROM employee LEFT JOIN role ON employee.role_id = role.id "+
-            "LEFT JOIN department ON role.department_id = department.id "+
+            "FROM employee LEFT JOIN role ON employee.role_id = role.id " +
+            "LEFT JOIN department ON role.department_id = department.id " +
             "LEFT JOIN employee manager ON manager.id = employee.manager_id;"
         );
     }
 
     // find manager employees by employeeID
-    findEmployeesByManager(employeeId){
+    findEmployeesByManager(employeeId) {
         return this.connection.query(
             "SELECT id, firstname, lastname FROM employee WHERE id != ?", employeeId
         );
     }
-    
+
     // find employees by departmend
-    findEmployeesByDepartment(departmentId){
+    findEmployeesByDepartment(departmentId) {
         return this.connection.query(
-            "SELECT employee.id, employee.firstname, employee.lastname, role.title "+
-            "FROM employee LEFT JOIN role ON employee.role_id = role.id "+
-            "LEFT JOIN department ON role.department_id = department.id "+
-            "WHERE department.id = ?;", departmentId 
+            "SELECT employee.id, employee.firstname, employee.lastname, role.title " +
+            "FROM employee LEFT JOIN role ON employee.role_id = role.id " +
+            "LEFT JOIN department ON role.department_id = department.id " +
+            "WHERE department.id = ?;", departmentId
         );
     }
-    
+
     // find all roles  using joins
-    findRoles(){
+    findRoles() {
         return this.connection.query(
             "SELECT role.id, role.title, department.name AS department, role.salary " +
             "FROM role LEFT JOIN department ON role.department_id = department_id;"
@@ -47,11 +47,11 @@ class DataBase {
     }
 
     // find all departments using joins
-    findDepartments(){
+    findDepartments() {
         return this.connection.query(
-            "SELECT department.id, department.name, SUM(role.salary) AS utilized_budget "+
-            "FROM employee LEFT JOIN role ON employee.role_id = role.id "+
-            "LEFT JOIN department ON role.department_id = department.id "+
+            "SELECT department.id, department.name, SUM(role.salary) AS utilized_budget " +
+            "FROM employee LEFT JOIN role ON employee.role_id = role.id " +
+            "LEFT JOIN department ON role.department_id = department.id " +
             "GROUP BY department.id, department.name;"
         );
     }
