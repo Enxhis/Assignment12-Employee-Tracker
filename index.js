@@ -17,9 +17,9 @@ logoDisplay();
 
 
 // display prompts
-function displayMainPrompts() {
+async function displayMainPrompts() {
     // array of options to choose for the user
-    const { userInput } = prompt([
+    const { userInput } = await prompt([
         {
             type: "list",
             name: "userInput",
@@ -118,9 +118,9 @@ function displayMainPrompts() {
     }
 }
 // Function displays all employees
-function viewEmployees() {
+async function viewEmployees() {
     // call the findEmployees function from db
-    const employees = db.findEmployees();
+    const employees = await db.findEmployees();
     console.log("\n");
     // to pretty print the data in a tabular way
     console.table(employees);
@@ -129,8 +129,8 @@ function viewEmployees() {
 }
 
 // Function displays employees by department
-function viewEmployeesByDepartment() {
-    const departments = db.findDepartments();
+async function viewEmployeesByDepartment() {
+    const departments = await db.findDepartments();
 
     // choose department
     const chooseDepartment = departments.map(({ id, name }) => ({
@@ -139,7 +139,7 @@ function viewEmployeesByDepartment() {
     }));
 
     // user prompt choice
-    const { departmentId } = prompt([
+    const { departmentId } = await prompt([
         {
             type: "list",
             name: "departmentId",
@@ -149,7 +149,7 @@ function viewEmployeesByDepartment() {
     ]);
 
     // pass the departmentId to the findEmployeesByDepartment function
-    const employees = db.findEmployeesByDepartment(departmentId);
+    const employees = await db.findEmployeesByDepartment(departmentId);
 
     console.log("\n");
     // display data in tabular way
@@ -160,8 +160,8 @@ function viewEmployeesByDepartment() {
 }
 
 // Function displays employees by manager
-function viewEmployeesByManager() {
-    const managers = db.findEmployees();
+async function viewEmployeesByManager() {
+    const managers = await db.findEmployees();
 
     // choose manager 
     const chooseManager = managers.map(({ id, firstname, lastname }) => ({
@@ -170,7 +170,7 @@ function viewEmployeesByManager() {
     }));
 
     // user prompt choices
-    const { managerId } = prompt([
+    const { managerId } = await prompt([
         {
             type: "list",
             name: "managerId",
@@ -180,7 +180,7 @@ function viewEmployeesByManager() {
     ]);
 
     // pass the nanagerId to the function findEmployeesByManager
-    const employees = db.findEmployeesByManager(managerId);
+    const employees = await db.findEmployeesByManager(managerId);
     console.log("\n");
 
     // check if the selected Id is not manager and has no reports to show
@@ -194,12 +194,12 @@ function viewEmployeesByManager() {
 }
 
 // Function adds new employee in database
-function addEmployee() {
-    const roles = db.findRoles();
-    const employees = db.findEmployees();
+async function addEmployee() {
+    const roles = await db.findRoles();
+    const employees = await db.findEmployees();
 
     // get input from user for the new employee (firstname, lastname)
-    const newEmployee = prompt([
+    const newEmployee = await prompt([
         {
             name: "firstname",
             message: "What is employee's firstname? "
@@ -217,7 +217,7 @@ function addEmployee() {
     }));
 
     // get role title from prompt
-    const { roleId } = prompt({
+    const { roleId } = await prompt({
         type: "list",
         name: "roleId",
         message: "What is new Employee's role?",
@@ -236,7 +236,7 @@ function addEmployee() {
     chooseManager.unshift({ name: "None", value: null });
 
     // get manager from prompt
-    const { managerId } = prompt({
+    const { managerId } = await prompt({
         type: "list",
         name: "managerId",
         message: "Who is the manager of the new employee? ",
@@ -247,7 +247,7 @@ function addEmployee() {
     newEmployee.manager_id = managerId;
 
     //call the createNewEmployee
-    db.createNewEmployee(newEmployee);
+    await db.createNewEmployee(newEmployee);
     // TEST IT
     //notify for the new Employee added
     console.log(`${newEmployee.firstname} ${newEmployee.lastname} is added to the database`);
@@ -257,8 +257,8 @@ function addEmployee() {
 }
 
 // Function deletes employee from database
-function removeEmployee() {
-    const employees = db.findEmployees();
+async function removeEmployee() {
+    const employees = await db.findEmployees();
     // choose employee
     const chooseEmployee = employees.map(({ id, firstname, lastname }) => ({
         name: `${firstname} ${lastname}`,
@@ -266,7 +266,7 @@ function removeEmployee() {
     }));
 
     // choose employee id to delete from database
-    const { employeeId } = prompt({
+    const { employeeId } = await prompt({
         type: "list",
         name: "employeeId",
         message: "Which employee would you like to remove?",
@@ -274,7 +274,7 @@ function removeEmployee() {
     });
 
     // pass employeeId to the deleteEmployee function
-    db.deleteEmployee(employeeId);
+    await db.deleteEmployee(employeeId);
     //TEST IT
     // Notify that employee was deleted from database
     console.log("Employee removed successfully!");
@@ -283,8 +283,8 @@ function removeEmployee() {
 }
 
 // Function updates data for current employee role
-function updateEmployeeRole() {
-    const employees = db.findEmployees();
+async function updateEmployeeRole() {
+    const employees = await db.findEmployees();
     // choose employee
     const chooseEmployee = employees.map(({ id, firstname, lastname }) => ({
         name: `${firstname} ${lastname}`,
@@ -292,7 +292,7 @@ function updateEmployeeRole() {
     }));
 
     // choose employeeId who will get its role updated
-    const { employeeId } = prompt({
+    const { employeeId } = await prompt({
         type: "list",
         name: "employeeId",
         message: "Which employee's role would you like to update?",
@@ -300,14 +300,14 @@ function updateEmployeeRole() {
     });
 
     // get all roles
-    const roles = db.findRoles();
+    const roles = await db.findRoles();
     // choose role
     const chooseRole = roles.map(({ id, title }) => ({
         name: title,
         value: id
     }));
     // choose roleId that the employee will get assigned with
-    const { roleId } = prompt({
+    const { roleId } = await prompt({
         type: "list",
         name: "roleId",
         message: "Which role will be assigned to the employee?",
@@ -315,7 +315,7 @@ function updateEmployeeRole() {
     });
 
     // pass roleId and employeeId to updateRole
-    db.updateRole(employeeId, roleId);
+    await db.updateRole(employeeId, roleId);
     //TEST IT
     // Notify that employee's role was updated
     console.log("Employee's role updated successfully!");
@@ -325,9 +325,9 @@ function updateEmployeeRole() {
 }
 
 // Function updates data for manager employee
-function updateEmployeeManager() {
+async function updateEmployeeManager() {
     // get all employees
-    const employees = db.findEmployees();
+    const employees = await db.findEmployees();
     //choose employee
     const chooseEmployee = employees.map(({ id, firstname, lastname }) => ({
         name: `${firstname} ${lastname}`,
@@ -335,14 +335,14 @@ function updateEmployeeManager() {
     }));
 
     // choose employee to be updated
-    const { employeeId } = prompt({
+    const { employeeId } = await prompt({
         type: "list",
         name: "employeeId",
         message: "Which employee's manager would you like to update?",
         choices: chooseEmployee
     });
 
-    const managers = db.findEmployeesByManager(employeeId);
+    const managers = await db.findEmployeesByManager(employeeId);
 
     // choose manager
     const chooseManager = managers.map(({ id, firstname, lastname }) => ({
@@ -351,7 +351,7 @@ function updateEmployeeManager() {
     }));
 
     // choose managerId to be updated
-    const { managerId } = prompt({
+    const { managerId } = await prompt({
         type: "list",
         name: "managerId",
         message: "Which employee would you like to set as manager?",
@@ -359,7 +359,7 @@ function updateEmployeeManager() {
     });
 
     // pass managerId and employeeID to the updateManager
-    db.updateManager(employeeId, managerId);
+    await db.updateManager(employeeId, managerId);
     // TEST IT
     // Notify that the manager was updated
     console.log("Employee's manager was updated successfully!");
@@ -368,9 +368,9 @@ function updateEmployeeManager() {
 }
 
 // Function displays departments
-function viewDepartments() {
+async function viewDepartments() {
     // call findDepartments function from db
-    const departments = db.findDepartments();
+    const departments = await db.findDepartments();
     console.log("\n");
     // present data in tabular way
     console.table(departments);
@@ -379,14 +379,14 @@ function viewDepartments() {
 }
 
 // Function adds new department to database
-function addDepartment() {
+async function addDepartment() {
     // get department from prompt
-    const department = prompt({
+    const department = await prompt({
         name: "name",
         message: "What is the dapartment's name?"
     });
     // pass department to the function arg
-    db.createNewDepartment(department);
+    await db.createNewDepartment(department);
     //TEST IT
     // notify for the new Entry
     console.log(`${department.name} added to the database!`)
@@ -395,8 +395,8 @@ function addDepartment() {
 }
 
 // Function deletes a current department
-function removeDepartment() {
-    const departments = db.findDepartments();
+async function removeDepartment() {
+    const departments = await db.findDepartments();
 
     // choose department
     const chooseDepartment = departments.map(({ id, name }) => ({
@@ -405,7 +405,7 @@ function removeDepartment() {
     }));
 
     // choose departemnt id to delete
-    const { departmentId } = prompt({
+    const { departmentId } = await prompt({
         type: "list",
         name: "departmentId",
         message: "Which department would you like to remove, together with roles &n employees?",
@@ -413,7 +413,7 @@ function removeDepartment() {
     });
 
     // pass departmentId to the deleteDepartment function
-    db.deleteDepartment(departmentId);
+    await db.deleteDepartment(departmentId);
     //TEST IT
     // Notify that the department was deleted
     console.log("Department was deleted successfully!");
@@ -422,9 +422,9 @@ function removeDepartment() {
 }
 
 // Function displays roles
-function viewRoles() {
+async function viewRoles() {
     // call the viewRoles from db
-    const roles = db.findRoles();
+    const roles = await db.findRoles();
     console.log("\n");
     // present the data in tabular way
     console.table(roles);
@@ -433,8 +433,8 @@ function viewRoles() {
 }
 
 // Function adds a new role in database
-function addRole() {
-    const departments = db.findDepartments();
+async function addRole() {
+    const departments = await db.findDepartments();
 
     // choose department
     const chooseDepartment = departments.map(({ id, name }) => ({
@@ -443,7 +443,7 @@ function addRole() {
     }));
 
     // get role from the user 
-    const newRole = prompt([
+    const newRole = await prompt([
         {
             name: "title",
             message: "What is the role's name?"
@@ -459,7 +459,7 @@ function addRole() {
             choices: chooseDepartment
         }
     ]);
-    db.createNewRole(newRole);
+    await db.createNewRole(newRole);
     //TEST IT
     // Notify for the new entry
     console.log(`${role.title} added to the database!`);
@@ -468,8 +468,8 @@ function addRole() {
 }
 
 // Function deletes a current role from database
-function removeRole() {
-    const roles = db.findRoles();
+async function removeRole() {
+    const roles = await db.findRoles();
     // choose role
     const chooseRole = roles.map(({ id, title }) => ({
         name: title,
@@ -477,7 +477,7 @@ function removeRole() {
     }));
 
     // choose role that will be deleted
-    const { roleId } = prompt({
+    const { roleId } = await prompt({
         type: "list",
         name: "roleId",
         message: "Which role would you like to remove together with the employees working in that role?",
@@ -485,7 +485,7 @@ function removeRole() {
     });
 
     // pass role id to the function deleteRole
-    db.deleteRole(roleId);
+    await db.deleteRole(roleId);
     //TEST IT
     // Notify that the role was removed
     console.log("Role was removed from database successfully!");
