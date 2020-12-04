@@ -395,6 +395,26 @@ function addRole() {
 
 // Function deletes a current role from database
 function removeRole() {
+    const roles = db.findRoles();
+    // choose role
+    const chooseRole = roles.map(({ id, title }) => ({
+        name: title,
+        value: id
+    }));
+
+    // choose role that will be deleted
+    const { roleId } = prompt({
+        type: "list",
+        name: "roleId",
+        message: "Which role would you like to remove together with the employees working in that role?",
+        choices: chooseRole
+    });
+
+    // pass role id to the function deleteRole
+    db.deleteRole(roleId);
+    //TEST IT
+    // Notify that the role was removed
+    console.log("Role was removed from database successfully!");
     // function call to display menu again
     displayMainPrompts()
 }

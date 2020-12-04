@@ -89,6 +89,13 @@ class DataBase {
         );
     }
 
+    // Delete from databse existing role
+    deleteRole(roleId) {
+        return this.connection.query(
+            "DELETE FROM role WHERE id = ?", roleId
+        );
+    }
+
 
 }
 
