@@ -68,6 +68,13 @@ class DataBase {
         );
     }
 
+    // create new role
+    createNewRole(role){
+        return this.connection.query(
+            "INSERT INTO role SET ?", role
+        );
+    }
+
 
 }
 

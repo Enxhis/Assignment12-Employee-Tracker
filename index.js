@@ -319,6 +319,35 @@ function viewRoles() {
 
 // Function adds a new role in database
 function addRole() {
+    const departments = db.findDepartments();
+
+    // choose department
+    const chooseDepartment =departments.map(({id, name}) => ({
+        name: name,
+        value: id
+    }));
+
+    // get role from the user 
+    const newRole = prompt([
+        {
+            name: "title",
+            message: "What is the role's name?"
+        },
+        {
+            name: "salary",
+            message: "What is the role's salary?"
+        },
+        {
+            type: "list",
+            name: "department_id",
+            message: "Which department is this role in?",
+            choices: chooseDepartment
+        }
+    ]);
+    db.createNewRole(newRole);
+    //TEST IT
+    // Notify for the new entry
+    console.log(`${role.title} added to the database!`);
     // function call to display menu again
     displayMainPrompts()
 }
