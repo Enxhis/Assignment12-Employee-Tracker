@@ -62,16 +62,23 @@ class DataBase {
         );
     }
     // create new department
-    createNewDepartment(department){
+    createNewDepartment(department) {
         return this.connection.query(
             "INSERT INTO department SET ?", department
         );
     }
 
     // create new role
-    createNewRole(role){
+    createNewRole(role) {
         return this.connection.query(
             "INSERT INTO role SET ?", role
+        );
+    }
+
+    // Delete from database existing employee
+    deleteEmployee(employeeId) {
+        return this.connection.query(
+            "DELETE FROM employee WHERE id =?", employeeId
         );
     }
 

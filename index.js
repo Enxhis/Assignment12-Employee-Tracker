@@ -257,6 +257,28 @@ function addEmployee() {
 
 // Function deletes employee from database
 function removeEmployee() {
+    const employees = db.findEmployees();
+    // choose employee
+    const chooseEmployee = employees.map(({ id, firstname, lastname }) => ({
+        name: `${firstname} ${lastname}`,
+        value: id
+    }));
+
+    // choose employee id to delete from database
+    const { employeeId } = prompt([
+        {
+            type: "list",
+            name: "employeeId",
+            message: "Which employee would you like to remove?",
+            choices: chooseEmployee
+        }
+    ]);
+
+    // pass employeeId to the deleteEmployee function
+    db.deleteEmployee(employeeId);
+    //TEST IT
+    // Notify that employee was deleted from database
+    console.log("Employee removed successfully!");
     // function call to display menu again
     displayMainPrompts()
 }
@@ -287,7 +309,7 @@ function viewDepartments() {
 // Function adds new department to database
 function addDepartment() {
     // get department from prompt
-    const department = prompt ({
+    const department = prompt({
         name: "name",
         message: "What is the dapartment's name?"
     });
@@ -322,7 +344,7 @@ function addRole() {
     const departments = db.findDepartments();
 
     // choose department
-    const chooseDepartment =departments.map(({id, name}) => ({
+    const chooseDepartment = departments.map(({ id, name }) => ({
         name: name,
         value: id
     }));
