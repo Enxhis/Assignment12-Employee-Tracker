@@ -9,6 +9,7 @@ require("console.table");
 function logoDisplay() {
     const logoTxt = logo({ name: "Employee Manager" }).render();
     console.log(logoTxt);
+    displayMainPrompts()
 }
 
 // call logoDisplay
@@ -18,7 +19,7 @@ logoDisplay();
 // display prompts
 function displayMainPrompts() {
     // array of options to choose for the user
-    const { userInput } = await prompt([
+    const { userInput } = prompt([
         {
             type: "list",
             name: "userInput",

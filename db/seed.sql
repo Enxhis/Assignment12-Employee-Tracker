@@ -30,15 +30,15 @@ VALUES
 INSERT INTO employee
     (firstname, lastname, role_id, manager_id)
 VALUES
-    ('Arielle', 'Hane', 1, 1)
-    ('Tianna', 'Kunze', 2, NULL)
-    ('Ella', 'Dickens', 3, NULL)
-    ('Jorge', 'Friesen', 4, 4)
-    ('Katie', 'Schiller', 5, NULL)
-    ('Carrie', 'Hessel', 6, NULL)
-    ('Jarred', 'Weissnat', 7, 7)
-    ('Alexandra', 'Kozey', 8, NULL)
-    ('Daniel', 'Ortiz', 9, NULL)
-    ('Josh', 'Rowe', 10, 10)
-    ('Marvin', 'Douglas', 11, NULL)
+    ('Arielle', 'Hane', 1, 1),
+    ('Tianna', 'Kunze', 2, NULL),
+    ('Ella', 'Dickens', 3, NULL),
+    ('Jorge', 'Friesen', 4, 4),
+    ('Katie', 'Schiller', 5, NULL),
+    ('Carrie', 'Hessel', 6, NULL),
+    ('Jarred', 'Weissnat', 7, 7),
+    ('Alexandra', 'Kozey', 8, NULL),
+    ('Daniel', 'Ortiz', 9, NULL),
+    ('Josh', 'Rowe', 10, 10),
+    ('Marvin', 'Douglas', 11, NULL),
     ('Maddison', 'Herman', 12, NULL);
