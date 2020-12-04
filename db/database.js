@@ -22,9 +22,19 @@ class DataBase {
     }
 
     // find manager employees by employeeID
-    findManagersByEmployeeID(employeeId){
+    findEmployeesByManager(employeeId){
         return this.connection.query(
             "SELECT id, firstname, lastname FROM employee WHERE id != ?", employeeId
+        );
+    }
+    
+    // find employees by departmend
+    findEmployeesByDepartment(departmentId){
+        return this.connection.query(
+            "SELECT employee.id, employee.firstname, employee.lastname, role.title "+
+            "FROM employee LEFT JOIN role ON employee.role_id = role.id "+
+            "LEFT JOIN department ON role.department_id = department.id "+
+            "WHERE department.id = ?;", departmentId 
         );
     }
     

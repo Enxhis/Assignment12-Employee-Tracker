@@ -129,6 +129,31 @@ function viewEmployees() {
 
 // Function displays employees by department
 function viewEmployeesByDepartment() {
+    const departments = db.findDepartments();
+
+    // choose department
+    const chooseDepartment = departments.map(({id, name}) => ({
+        name: name,
+        value: id
+    }));
+
+    // user prompt choice
+    const {departmentId} = prompt([
+        {
+            type: "list",
+            name: "departmentId",
+            message: "Which department's employees would you like to see? ",
+            choices: chooseDepartment
+        }
+    ]);
+
+    // pass the departmentId to the findEmployeesByDepartment function
+    const employees = db.findEmployeesByDepartment(departmentId);
+
+    console.log("\n");
+    // display data in tabular way
+    console.table(employees);
+
     // function call to display menu again
     displayMainPrompts()
 }
@@ -148,13 +173,13 @@ function viewEmployeesByManager() {
         {
             type: "list",
             name: "managerId",
-            message: "Which employee's report do you want to see?",
+            message: "Which employee's report would you like to see?",
             choices: chooseManager
         }
     ]);
 
-    // pass the nanagerId to the function findManagersByEmployeeID
-    const employees = db.findManagersByEmployeeID(managerId);
+    // pass the nanagerId to the function findEmployeesByManager
+    const employees = db.findEmployeesByManager(managerId);
     console.log("\n");
 
     // check if the selected Id is not manager and has no reports to show
