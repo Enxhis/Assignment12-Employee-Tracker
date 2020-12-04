@@ -1,4 +1,4 @@
-const {prompt} = require("inquirer");
+const { prompt } = require("inquirer");
 const logo = require("asciiart-logo");
 // require db
 const db = require("./db");
@@ -7,7 +7,7 @@ require("console.table");
 
 // display logo prompt function
 function logoDisplay() {
-    const logoTxt = logo({name: "Employee Manager"}).render();
+    const logoTxt = logo({ name: "Employee Manager" }).render();
     console.log(logoTxt);
 }
 
@@ -16,7 +16,7 @@ logoDisplay();
 
 
 // display prompts
-function displayMainPrompts(){
+function displayMainPrompts() {
     // array of options to choose for the user
     const { userInput } = await prompt([
         {
@@ -86,38 +86,38 @@ function displayMainPrompts(){
 
     // switch case depending on the userInput
     switch (userInput) {
-        case "VIEW_EMPLOYEES" :
+        case "VIEW_EMPLOYEES":
             return viewEmployees();
-        case "VIEW_EMPLOYEES_BY_DEPARTMENT" :
+        case "VIEW_EMPLOYEES_BY_DEPARTMENT":
             return viewEmployeesByDepartment();
-        case "VIEW_EMPLOYEES_BY_MANAGER" :
+        case "VIEW_EMPLOYEES_BY_MANAGER":
             return viewEmployeesByManager();
-        case "ADD_EMPLOYEE" :
+        case "ADD_EMPLOYEE":
             return addEmployee();
-        case "REMOVE_EMPLOYEE" :
+        case "REMOVE_EMPLOYEE":
             return removeEmployee();
-        case "UPDATE_EMPLOYEE_ROLE" :
+        case "UPDATE_EMPLOYEE_ROLE":
             return updateEmployeeRole();
-        case "UPDATE_EMPLOYEE_MANAGER" :
+        case "UPDATE_EMPLOYEE_MANAGER":
             return updateEmployeeManager();
-        case "VIEW_DEPARTMENTS" :
+        case "VIEW_DEPARTMENTS":
             return viewDepartments();
-        case "ADD_DEPARTMENT" :
+        case "ADD_DEPARTMENT":
             return addDepartment();
-        case "REMOVE_DEPARTMENT" :
+        case "REMOVE_DEPARTMENT":
             return removeDepartment();
-        case "VIEW_ROLES" :
+        case "VIEW_ROLES":
             return viewRoles();
-        case "ADD_ROLE" :
+        case "ADD_ROLE":
             return addRole();
-        case "REMOVE_ROLE" :
+        case "REMOVE_ROLE":
             return removeRole();
         default:
-            return quit(); 
+            return quit();
     }
 }
 // Function displays all employees
-function viewEmployees(){
+function viewEmployees() {
     // call the findEmployees function from db
     const employees = db.findEmployees();
     console.log("\n");
@@ -128,13 +128,41 @@ function viewEmployees(){
 }
 
 // Function displays employees by department
-function viewEmployeesByDepartment(){
+function viewEmployeesByDepartment() {
     // function call to display menu again
     displayMainPrompts()
 }
 
 // Function displays employees by manager
-function viewEmployeesByManager(){
+function viewEmployeesByManager() {
+    const managers = db.findEmployees();
+
+    // choose manager 
+    const chooseManager = managers.map(({ id, firstname, lastname }) => ({
+        name: `${firstname} ${lastname}`,
+        value: id
+    }));
+
+    // user prompt choices
+    const { managerId } = prompt([
+        {
+            type: "list",
+            name: "managerId",
+            message: "Which employee's report do you want to see?",
+            choices: chooseManager
+        }
+    ]);
+
+    // pass the nanagerId to the function findManagersByEmployeeID
+    const employees = db.findManagersByEmployeeID(managerId);
+    console.log("\n");
+
+    // check if the selected Id is not manager and has no reports to show
+    if (employees.length === 0) {
+        console.log("The employee selected has no reports!");
+    } else {
+        console.table(employees);
+    }
     // function call to display menu again
     displayMainPrompts()
 }
@@ -146,25 +174,25 @@ function addEmployee() {
 }
 
 // Function deletes employee from database
-function removeEmployee(){
+function removeEmployee() {
     // function call to display menu again
     displayMainPrompts()
 }
 
 // Function updates data for current employee role
-function updateEmployeeRole(){
+function updateEmployeeRole() {
     // function call to display menu again
     displayMainPrompts()
 }
 
 // Function updates data for manager employee
-function updateEmployeeManager(){
+function updateEmployeeManager() {
     // function call to display menu again
     displayMainPrompts()
 }
 
 // Function displays departments
-function viewDepartments(){
+function viewDepartments() {
     // call findDepartments function from db
     const departments = db.findDepartments();
     console.log("\n");
@@ -181,13 +209,13 @@ function addDepartment() {
 }
 
 // Function deletes a current department
-function removeDepartment(){
+function removeDepartment() {
     // function call to display menu again
     displayMainPrompts()
 }
 
 // Function displays roles
-function viewRoles(){
+function viewRoles() {
     // call the viewRoles from db
     const roles = db.findRoles();
     console.log("\n");
@@ -198,18 +226,18 @@ function viewRoles(){
 }
 
 // Function adds a new role in database
-function addRole(){
+function addRole() {
     // function call to display menu again
     displayMainPrompts()
 }
 
 // Function deletes a current role from database
-function removeRole(){
+function removeRole() {
     // function call to display menu again
     displayMainPrompts()
 }
 
 // Function quits the program
-function quit(){
+function quit() {
 
 }

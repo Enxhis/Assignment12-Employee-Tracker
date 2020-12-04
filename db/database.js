@@ -20,6 +20,13 @@ class DataBase {
             "LEFT JOIN employee manager ON manager.id = employee.manager_id;"
         );
     }
+
+    // find manager employees by employeeID
+    findManagersByEmployeeID(employeeId){
+        return this.connection.query(
+            "SELECT id, firstname, lastname FROM employee WHERE id != ?", employeeId
+        );
+    }
     
     // find all roles  using joins
     findRoles(){
