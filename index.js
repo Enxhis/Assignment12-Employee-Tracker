@@ -232,7 +232,7 @@ function addEmployee() {
         value: id
     }));
 
-    chooseRole.unshift({ name: "None", value: null });
+    chooseManager.unshift({ name: "None", value: null });
 
     // get manager from prompt
     const { managerId } = prompt({
@@ -286,6 +286,16 @@ function viewDepartments() {
 
 // Function adds new department to database
 function addDepartment() {
+    // get department from prompt
+    const department = prompt ({
+        name: "name",
+        message: "What is the dapartment's name?"
+    });
+    // pass department to the function arg
+    db.createNewDepartment(department);
+    //TEST IT
+    // notify for the new Entry
+    console.log(`${department.name} added to the database!`)
     // function call to display menu again
     displayMainPrompts()
 }

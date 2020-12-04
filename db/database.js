@@ -61,6 +61,12 @@ class DataBase {
             "INSERT INTO employee SET ?", employee
         );
     }
+    // create new department
+    createNewDepartment(department){
+        return this.connection.query(
+            "INSERT INTO department SET ?", department
+        );
+    }
 
 
 }
