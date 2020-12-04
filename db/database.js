@@ -20,5 +20,15 @@ class DataBase {
             "LEFT JOIN employee manager ON manager.id = employee.manager_id;"
         );
     }
+    
+    // find all roles  using joins
+    findRoles(){
+        return this.connection.query(
+            "SELECT role.id, role.title, department.name AS department, role.salary " +
+            "FROM role LEFT JOIN department ON role.department_id = department_id;"
+        )
+    }
 
 }
+
+module.exports = new DataBase(connection);

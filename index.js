@@ -2,6 +2,7 @@ const {prompt} = require("inquirer");
 const logo = require("asciiart-logo");
 // require db
 const db = require("./db");
+// require console.table to better present the data in a tabular way
 require("console.table");
 
 // display logo prompt function
@@ -120,6 +121,7 @@ function viewEmployees(){
     // call the findEmployees function from db
     const employees = db.findEmployees();
     console.log("\n");
+    // to pretty print the data in a tabular way
     console.table(employees);
     // function call to display menu again
     displayMainPrompts()
@@ -181,6 +183,11 @@ function removeDepartment(){
 
 // Function displays roles
 function viewRoles(){
+    // call the viewRoles from db
+    const roles = db.findRoles();
+    console.log("\n");
+    // present the data in tabular way
+    console.table(roles);
     // function call to display menu again
     displayMainPrompts()
 }
