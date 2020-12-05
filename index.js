@@ -1,8 +1,11 @@
-const { prompt } = require("inquirer");
+const inquirer= require("inquirer");
 const logo = require("asciiart-logo");
 const db = require("./db");
 // require console.table to better present the data in a tabular way
 require("console.table");
+
+// call logoDisplay
+logoDisplay();
 
 // display logo prompt function
 function logoDisplay() {
@@ -11,14 +14,12 @@ function logoDisplay() {
     displayMainPrompts();
 }
 
-// call logoDisplay
-logoDisplay();
 
 
 // display prompts
 async function displayMainPrompts() {
     // array of options to choose for the user
-    const { userInput } = await prompt([
+    const { userInput } = await inquirer.prompt([
         {
             type: "list",
             name: "userInput",
@@ -138,7 +139,7 @@ async function viewEmployeesByDepartment() {
     }));
 
     // user prompt choice
-    const { departmentId } = await prompt([
+    const { departmentId } = await inquirer.prompt([
         {
             type: "list",
             name: "departmentId",
@@ -169,7 +170,7 @@ async function viewEmployeesByManager() {
     }));
 
     // user prompt choices
-    const { managerId } = await prompt([
+    const { managerId } = await inquirer.prompt([
         {
             type: "list",
             name: "managerId",
@@ -198,7 +199,7 @@ async function addEmployee() {
     const employees = await db.findEmployees();
 
     // get input from user for the new employee (firstname, lastname)
-    const newEmployee = await prompt([
+    const newEmployee = await inquirer.prompt([
         {
             name: "firstname",
             message: "What is employee's firstname? "
@@ -216,7 +217,7 @@ async function addEmployee() {
     }));
 
     // get role title from prompt
-    const { roleId } = await prompt([
+    const { roleId } = await inquirer.prompt([
         {
             type: "list",
             name: "roleId",
@@ -237,7 +238,7 @@ async function addEmployee() {
     chooseManager.unshift({ name: "None", value: null });
 
     // get manager from prompt
-    const { managerId } = await prompt([
+    const { managerId } = await inquirer.prompt([
         {
             type: "list",
             name: "managerId",
@@ -269,7 +270,7 @@ async function removeEmployee() {
     }));
 
     // choose employee id to delete from database
-    const { employeeId } = await prompt([
+    const { employeeId } = await inquirer.prompt([
         {
             type: "list",
             name: "employeeId",
@@ -297,7 +298,7 @@ async function updateEmployeeRole() {
     }));
 
     // choose employeeId who will get its role updated
-    const { employeeId } = await prompt([
+    const { employeeId } = await inquirer.prompt([
         {
             type: "list",
             name: "employeeId",
@@ -314,7 +315,7 @@ async function updateEmployeeRole() {
         value: id
     }));
     // choose roleId that the employee will get assigned with
-    const { roleId } = await prompt([
+    const { roleId } = await inquirer.prompt([
         {
             type: "list",
             name: "roleId",
@@ -344,7 +345,7 @@ async function updateEmployeeManager() {
     }));
 
     // choose employee to be updated
-    const { employeeId } = await prompt([
+    const { employeeId } = await inquirer.prompt([
         {
             type: "list",
             name: "employeeId",
@@ -362,7 +363,7 @@ async function updateEmployeeManager() {
     }));
 
     // choose managerId to be updated
-    const { managerId } = await prompt([
+    const { managerId } = await inquirer.prompt([
         {
             type: "list",
             name: "managerId",
@@ -394,7 +395,7 @@ async function viewDepartments() {
 // Function adds new department to database
 async function addDepartment() {
     // get department from prompt
-    const department = await prompt([
+    const department = await inquirer.prompt([
         {
             name: "name",
             message: "What is the dapartment's name?"
@@ -420,7 +421,7 @@ async function removeDepartment() {
     }));
 
     // choose departemnt id to delete
-    const { departmentId } = await prompt([
+    const { departmentId } = await inquirer.prompt([
         {
             type: "list",
             name: "departmentId",
@@ -460,7 +461,7 @@ async function addRole() {
     }));
 
     // get role from the user 
-    const newRole = await prompt([
+    const newRole = await inquirer.prompt([
         {
             name: "title",
             message: "What is the role's name?"
@@ -495,7 +496,7 @@ async function removeRole() {
     }));
 
     // choose role that will be deleted
-    const { roleId } = await prompt([
+    const { roleId } = await inquirer.prompt([
         {
             type: "list",
             name: "roleId",
