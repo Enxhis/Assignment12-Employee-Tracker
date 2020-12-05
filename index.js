@@ -1,6 +1,5 @@
 const { prompt } = require("inquirer");
 const logo = require("asciiart-logo");
-// require db
 const db = require("./db");
 // require console.table to better present the data in a tabular way
 require("console.table");
@@ -125,7 +124,7 @@ async function viewEmployees() {
     // to pretty print the data in a tabular way
     console.table(employees);
     // function call to display menu again
-    displayMainPrompts()
+    displayMainPrompts();
 }
 
 // Function displays employees by department
@@ -156,7 +155,7 @@ async function viewEmployeesByDepartment() {
     console.table(employees);
 
     // function call to display menu again
-    displayMainPrompts()
+    displayMainPrompts();
 }
 
 // Function displays employees by manager
@@ -190,7 +189,7 @@ async function viewEmployeesByManager() {
         console.table(employees);
     }
     // function call to display menu again
-    displayMainPrompts()
+    displayMainPrompts();
 }
 
 // Function adds new employee in database
@@ -304,7 +303,6 @@ async function updateEmployeeRole() {
             name: "employeeId",
             message: "Which employee's role would you like to update?",
             choices: chooseEmployee
-
         }
     ]);
 
@@ -332,7 +330,7 @@ async function updateEmployeeRole() {
     console.log("Employee's role updated successfully!");
 
     // function call to display menu again
-    displayMainPrompts()
+    displayMainPrompts();
 }
 
 // Function updates data for manager employee
@@ -478,6 +476,7 @@ async function addRole() {
             choices: chooseDepartment
         }
     ]);
+
     await db.createNewRole(newRole);
     //TEST IT
     // Notify for the new entry
