@@ -41,7 +41,7 @@ class DataBase {
     findDepartments() {
         return this.connection.query(
             "SELECT * FROM department ;"
-            //"SELECT department.id, department.name, SUM(role.salary) AS utilized_budget FROM employee LEFT JOIN role ON employee.role_id = role.id LEFT JOIN department ON role.department_id = department.id GROUP BY department.id, department.name;"
+            //"SELECT department.id, department.name, SUM(role.salary) AS utilized_budget FROM role LEFT JOIN department ON role.department_id = department.id GROUP BY department.id, department.name;"
         );
     }
     // create new employee
