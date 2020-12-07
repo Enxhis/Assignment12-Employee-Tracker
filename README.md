@@ -5,15 +5,30 @@
 ## Table of content
   1. [Usage](#usage)
   2. [Technology](#technology)
-  3. [Image](#image)
-  4. [Links](#links)
-  5. [Contribution](#contribution)
-  6. [Licence](#licence)
-  7. [Questions](#questions)
+  3. [Installation](#installation)
+  4. [Image](#image)
+  5. [Links](#links)
+  6. [Contribution](#contribution)
+  7. [Licence](#licence)
+  8. [Questions](#questions)
 
 ## Usage
+ * As a business owner 
+ ... I want to be able to view and manage the departments, roles, and employees in my company
+ So that I can organize and plan my business
 
 ## Technology
+ * Javascript 
+ * Node
+ * MYSQL
+ * Inquirer
+ * console.table
+ * asciiart-logo
+
+## Installation
+ * Make sure you have node installed in your machine and have cloned this repo.
+ * Run : ```npm install``` in order to install all dependencies 
+ * Run : ```node index.js``` and the application will start 
 
 ## Image
 
