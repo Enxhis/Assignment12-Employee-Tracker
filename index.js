@@ -1,4 +1,4 @@
-const inquirer= require("inquirer");
+const inquirer = require("inquirer");
 const logo = require("asciiart-logo");
 const db = require("./db");
 // require console.table to better present the data in a tabular way
@@ -481,7 +481,7 @@ async function addRole() {
     await db.createNewRole(newRole);
     //TEST IT
     // Notify for the new entry
-    console.log(`${role.title} added to the database!`);
+    console.log(`${newRole.title} added to the database!`);
     // function call to display menu again
     displayMainPrompts();
 }
