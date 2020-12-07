@@ -33,6 +33,8 @@
 ## Image
 ![Employee-Tracker](/Assets/Employee-Tracker-Screenshot.png)
 ## Links
+ * https://github.com/Enxhis/Assignment12-Employee-Tracker
+ * https://drive.google.com/file/d/17aUyn9VkdQehAr2PxuCp-qXrHtvloR4z/view
 
 ## Contribution
   * Enxhi Salaj
