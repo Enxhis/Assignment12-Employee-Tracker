@@ -516,6 +516,8 @@ async function removeRole() {
 
 // Function quits the program
 function quit() {
-    console.log("Thank you for interacting with the terminal prompt! GoodBye!");
+    //console.log("Thank you for interacting with the terminal prompt! GoodBye!");
+    const logoTxt = logo({ name: "GoodBye!" }).render();
+    console.log(logoTxt);
     process.exit();
 }
