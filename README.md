@@ -31,7 +31,7 @@
  * Run : ```node index.js``` and the application will start 
 
 ## Image
-
+![Employee-Tracker](/Assets/Employee-Tracker-Screenshot.png)
 ## Links
 
 ## Contribution
