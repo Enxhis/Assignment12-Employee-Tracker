@@ -1,4 +1,4 @@
-# Assignment12-Employee-Tracker
+# Employee-Tracker
 ## Description
   * This is a CLI application for building and managing a company’s data using Node, Inquirer, and MYSQL. This application enables keeping track of all the employees, their roles, and the departments they work in. Additionally, it is possible to add new departments with new roles and employees, update the database or remove them completely.
   
